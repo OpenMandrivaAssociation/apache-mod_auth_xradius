@@ -22,6 +22,7 @@ Requires:	apache >= 2.2.0
 BuildRequires:  apache-devel >= 2.2.0
 BuildRequires:  apr_memcache-devel
 Epoch:		1
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 mod_auth_xradius provides high performance authentication against
