@@ -3,7 +3,7 @@
 %define mod_conf 14_%{mod_name}.conf
 %define mod_so %{mod_name}.so
 
-Summary:	Mod_xradius is a DSO module for the apache Web server
+Summary:	DSO module for the apache Web server
 Name:		apache-%{mod_name}
 Version:	0.4.6
 Release:	%mkrel 5
