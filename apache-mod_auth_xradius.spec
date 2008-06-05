@@ -6,13 +6,14 @@
 Summary:	DSO module for the apache Web server
 Name:		apache-%{mod_name}
 Version:	0.4.6
-Release:	%mkrel 7
+Release:	%mkrel 8
 Group:		System/Servers
 License:	Apache License
 URL:		http://www.outoforder.cc/projects/apache/mod_auth_xradius/
 Source0:	http://www.outoforder.cc/downloads/mod_auth_xradius/%{mod_name}-%{version}.tar.bz2
 Source1:	%{mod_conf}.bz2
 Patch0:		mod_auth_xradius-0.4.5-no_ap_prefix.diff
+Patch1:		mod_auth_xradius-apu13_fix.diff
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 Requires(pre):	apache-conf >= 2.2.0
@@ -20,7 +21,7 @@ Requires(pre):	apache >= 2.2.0
 Requires:	apache-conf >= 2.2.0
 Requires:	apache >= 2.2.0
 BuildRequires:  apache-devel >= 2.2.0
-BuildRequires:  apr_memcache-devel
+BuildRequires:	apr-util-devel >= 1.3.0
 Epoch:		1
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -41,16 +42,21 @@ Features:
 
 %setup -q -n %{mod_name}-%{version}
 %patch0 -p0
+%patch1 -p0
 
 # lib64 fixes
 perl -pi -e "s|/lib\ |/%{_lib}\ |g" m4/apr_memcache.m4
 perl -pi -e "s|/lib/|/%{_lib}/|g" m4/apr_memcache.m4
+perl -pi -e "s|/lib\b|/%{_lib}|g" m4/apr_memcache.m4
 
 %build
 #sh autogen.sh
 rm -f configure
 libtoolize --force --copy; aclocal -I m4; autoheader; automake --add-missing --copy --foreign; autoconf
 rm -rf autom4te.cache
+
+export APR_MEMCACHE_LIBS="`apu-1-config --link-ld`"
+export APR_MEMCACHE_CFLAGS="`apu-1-config --includes`"
 
 %configure2_5x --localstatedir=/var/lib \
     --with-apxs=%{_sbindir}/apxs \
