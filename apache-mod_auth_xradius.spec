@@ -52,7 +52,7 @@ rm -f configure
 libtoolize --force --copy; aclocal -I m4; autoheader; automake --add-missing --copy --foreign; autoconf
 rm -rf autom4te.cache
 
-%configure2_5x \
+%configure2_5x --localstatedir=/var/lib \
     --with-apxs=%{_sbindir}/apxs \
     --with-apr-memcache=%{_prefix}
 
