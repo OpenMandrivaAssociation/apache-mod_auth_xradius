@@ -6,7 +6,7 @@
 Summary:	DSO module for the apache Web server
 Name:		apache-%{mod_name}
 Version:	0.4.6
-Release:	%mkrel 8
+Release:	%mkrel 9
 Group:		System/Servers
 License:	Apache License
 URL:		http://www.outoforder.cc/projects/apache/mod_auth_xradius/
