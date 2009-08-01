@@ -58,7 +58,7 @@ cp `aclocal-1.7 --print-ac-dir`/{libtool,ltoptions,ltsugar,ltversion,lt~obsolete
 %endif
 
 rm -f configure
-libtoolize --force --copy; aclocal -I m4; autoheader; automake --add-missing --copy --foreign; autoconf
+libtoolize --force --copy; aclocal-1.7 -I m4; autoheader; automake-1.7 --add-missing --copy --foreign; autoconf
 rm -rf autom4te.cache
 
 export APR_MEMCACHE_LIBS="`apu-1-config --link-ld`"
