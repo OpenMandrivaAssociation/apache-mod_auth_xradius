@@ -22,6 +22,7 @@ Requires:	apache-conf >= 2.2.0
 Requires:	apache >= 2.2.0
 BuildRequires:  apache-devel >= 2.2.0
 BuildRequires:	apr-util-devel >= 1.3.0
+BuildRequires:	automake1.7
 Epoch:		1
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -51,6 +52,11 @@ perl -pi -e "s|/lib\b|/%{_lib}|g" m4/apr_memcache.m4
 
 %build
 #sh autogen.sh
+
+%if %{mdkversion} >= 200910
+cp `aclocal-1.7 --print-ac-dir`/{libtool,ltoptions,ltsugar,ltversion,lt~obsolete}.m4 m4/
+%endif
+
 rm -f configure
 libtoolize --force --copy; aclocal -I m4; autoheader; automake --add-missing --copy --foreign; autoconf
 rm -rf autom4te.cache
