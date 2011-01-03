@@ -14,6 +14,7 @@ Source0:	http://www.outoforder.cc/downloads/mod_auth_xradius/%{mod_name}-%{versi
 Source1:	%{mod_conf}.bz2
 Patch0:		mod_auth_xradius-0.4.5-no_ap_prefix.diff
 Patch1:		mod_auth_xradius-apu13_fix.diff
+Patch2:		mod_auth_xradius-0.4.6-autopoo_fixes.diff
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
 Requires(pre):	apache-conf >= 2.2.0
@@ -44,6 +45,7 @@ Features:
 %setup -q -n %{mod_name}-%{version}
 %patch0 -p0
 %patch1 -p0
+%patch2 -p1
 
 # lib64 fixes
 perl -pi -e "s|/lib\ |/%{_lib}\ |g" m4/apr_memcache.m4
@@ -57,9 +59,9 @@ perl -pi -e "s|/lib\b|/%{_lib}|g" m4/apr_memcache.m4
 cp `aclocal --print-ac-dir`/{libtool,ltoptions,ltsugar,ltversion,lt~obsolete}.m4 m4/
 %endif
 
+rm -rf autom4te.cache
 rm -f configure
 libtoolize --force --copy; aclocal -I m4; autoheader; automake --add-missing --copy --foreign; autoconf
-rm -rf autom4te.cache
 
 export APR_MEMCACHE_LIBS="`apu-1-config --link-ld`"
 export APR_MEMCACHE_CFLAGS="`apu-1-config --includes`"
