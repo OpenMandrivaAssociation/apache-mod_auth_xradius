@@ -6,7 +6,7 @@
 Summary:	DSO module for the apache Web server
 Name:		apache-%{mod_name}
 Version:	0.4.6
-Release:	%mkrel 15
+Release:	%mkrel 16
 Group:		System/Servers
 License:	Apache License
 URL:		http://www.outoforder.cc/projects/apache/mod_auth_xradius/
@@ -22,7 +22,7 @@ Requires:	apache-conf >= 2.2.0
 Requires:	apache >= 2.2.0
 BuildRequires:  apache-devel >= 2.2.0
 BuildRequires:	apr-util-devel >= 1.3.0
-BuildRequires:	automake1.7
+BuildRequires:	automake
 Epoch:		1
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
@@ -54,11 +54,11 @@ perl -pi -e "s|/lib\b|/%{_lib}|g" m4/apr_memcache.m4
 #sh autogen.sh
 
 %if %{mdkversion} >= 200910
-cp `aclocal-1.7 --print-ac-dir`/{libtool,ltoptions,ltsugar,ltversion,lt~obsolete}.m4 m4/
+cp `aclocal --print-ac-dir`/{libtool,ltoptions,ltsugar,ltversion,lt~obsolete}.m4 m4/
 %endif
 
 rm -f configure
-libtoolize --force --copy; aclocal-1.7 -I m4; autoheader; automake-1.7 --add-missing --copy --foreign; autoconf
+libtoolize --force --copy; aclocal -I m4; autoheader; automake --add-missing --copy --foreign; autoconf
 rm -rf autom4te.cache
 
 export APR_MEMCACHE_LIBS="`apu-1-config --link-ld`"
