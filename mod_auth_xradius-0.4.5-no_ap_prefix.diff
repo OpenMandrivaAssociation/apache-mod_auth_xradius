@@ -1,0 +1,13 @@
+--- m4/apr_memcache.m4	2005-07-05 19:55:01.000000000 +0200
++++ m4/apr_memcache.m4.oden	2009-01-07 15:59:53.000000000 +0100
+@@ -20,10 +20,6 @@
+     test_paths="${mc_path}"
+ fi
+ 
+-if test -n ${AP_PREFIX}; then
+-    test_paths="${AP_PREFIX} ${test_paths}"
+-fi
+-
+ for x in $test_paths ; do
+     amc_shlib="${x}/libapr_memcache${shrext_cmds}"
+     AC_MSG_CHECKING([for apr_memcache library in ${x}/lib])

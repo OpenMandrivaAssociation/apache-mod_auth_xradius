@@ -1,0 +1,29 @@
+diff -Naur mod_auth_xradius-0.4.6/configure.ac mod_auth_xradius-0.4.6.oden/configure.ac
+--- mod_auth_xradius-0.4.6/configure.ac	2005-07-05 20:35:17.000000000 +0200
++++ mod_auth_xradius-0.4.6.oden/configure.ac	2011-01-03 12:13:19.962892151 +0100
+@@ -7,6 +7,7 @@
+ OOO_MAINTAIN_MODE
+ AM_MAINTAINER_MODE
+ AC_CANONICAL_TARGET
++AC_CONFIG_MACRO_DIR([m4])
+ AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+ AM_CONFIG_HEADER(include/mod_auth_xradius_config.h:config.in)
+ 
+@@ -15,7 +16,7 @@
+ AC_PROG_CC
+ AC_PROG_LD
+ AC_PROG_INSTALL
+-AC_PROG_RANLIB
++LT_INIT
+ 
+ AP_VERSION=2.0.40
+ CHECK_APACHE(,$AP_VERSION,
+diff -Naur mod_auth_xradius-0.4.6/Makefile.am mod_auth_xradius-0.4.6.oden/Makefile.am
+--- mod_auth_xradius-0.4.6/Makefile.am	2005-07-05 20:36:13.000000000 +0200
++++ mod_auth_xradius-0.4.6.oden/Makefile.am	2011-01-03 12:11:39.441458886 +0100
+@@ -1,4 +1,5 @@
+ AUTOMAKE_OPTIONS = foreign dist-bzip2
++ACLOCAL_AMFLAGS = -I m4
+ 
+ LIBRADIUS_EXTRA = libradius/md5.h libradius/radlib.h \
+                 libradius/radlib_vs.h libradius/porting.h \

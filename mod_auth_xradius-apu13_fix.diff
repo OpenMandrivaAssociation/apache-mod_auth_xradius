@@ -1,0 +1,25 @@
+--- m4/apr_memcache.m4	2008-06-05 20:38:17.000000000 +0200
++++ m4/apr_memcache.m4.oden	2008-06-05 20:38:04.000000000 +0200
+@@ -21,7 +21,7 @@
+ fi
+ 
+ for x in $test_paths ; do
+-    amc_shlib="${x}/libapr_memcache${shrext_cmds}"
++    amc_shlib="${x}/libaprutil-1${shrext_cmds}"
+     AC_MSG_CHECKING([for apr_memcache library in ${x}/lib])
+     if test -f ${amc_shlib}; then
+         AC_MSG_RESULT([yes])
+@@ -29,10 +29,10 @@
+         save_LDFLAGS=$LDFLAGS
+         CFLAGS="$CFLAGS"
+         LDFLAGS="-L$x/lib $LDFLAGS"
+-        AC_CHECK_LIB(apr_memcache, apr_memcache_create,
++        AC_CHECK_LIB(aprutil-1, apr_memcache_create,
+             [
+-            APR_MEMCACHE_LIBS="-R$x/lib -L$x/lib -lapr_memcache"
+-            APR_MEMCACHE_CFLAGS="-I$x/include/apr_memcache-0"
++            APR_MEMCACHE_LIBS="`apu-1-config --link-ld`"
++            APR_MEMCACHE_CFLAGS="`apu-1-config --includes`"
+             ])
+         CFLAGS=$save_CFLAGS
+         LDFLAGS=$save_LDFLAGS
