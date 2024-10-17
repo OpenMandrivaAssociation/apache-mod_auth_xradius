@@ -9,7 +9,7 @@ Version:	0.4.6
 Release:	%mkrel 18
 Group:		System/Servers
 License:	Apache License
-URL:		http://www.outoforder.cc/projects/apache/mod_auth_xradius/
+URL:		https://www.outoforder.cc/projects/apache/mod_auth_xradius/
 Source0:	http://www.outoforder.cc/downloads/mod_auth_xradius/%{mod_name}-%{version}.tar.bz2
 Source1:	%{mod_conf}.bz2
 Patch0:		mod_auth_xradius-0.4.5-no_ap_prefix.diff
